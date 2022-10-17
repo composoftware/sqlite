@@ -1408,28 +1408,31 @@ public class CapacitorSQLitePlugin: CAPPlugin {
         config.iosIsEncryption = 1
         config.biometricAuth = 0
         config.iosKeychainPrefix = ""
-        let configPlugin = getConfig()
-        if let keychainPrefix = configPlugin.getString("iosKeychainPrefix") {
+        if let keychainPrefix = getConfigValue("iosKeychainPrefix") as? String {
             config.iosKeychainPrefix = keychainPrefix
         }
-        if let iosDatabaseLocation = configPlugin.getString("iosDatabaseLocation") {
+        if let iosDatabaseLocation = getConfigValue("iosDatabaseLocation")
+            as? String {
             config.iosDatabaseLocation = iosDatabaseLocation
         }
-        let isEncryption = configPlugin.getBoolean("iosIsEncryption", false)
-        if !isEncryption {
-            config.iosIsEncryption = 0
+        if let isEncryption = getConfigValue("iosIsEncryption") as? Bool {
+            if !isEncryption {
+                config.iosIsEncryption = 0
+            }
         }
         if config.iosIsEncryption == 1 {
-            let iosBiometric = configPlugin.getObject("iosBiometric")
-            if let bioAuth = iosBiometric?["biometricAuth"] as? Bool {
-                if bioAuth {
-                    config.biometricAuth = 1
-                    if let bioTitle = iosBiometric?["biometricTitle"] as? String {
-                        config.biometricTitle = bioTitle.count > 0
-                            ? bioTitle
-                            : "Biometric login for capacitor sqlite"
+            if let iosBiometric = getConfigValue("iosBiometric") as? [String: Any] {
+                if let bioAuth = iosBiometric["biometricAuth"] as? Bool {
+                    if bioAuth {
+                        config.biometricAuth = 1
+                        if let bioTitle = iosBiometric["biometricTitle"] as? String {
+                            config.biometricTitle = bioTitle.count > 0
+                                ? bioTitle
+                                : "Biometric login for capacitor sqlite"
+                        }
                     }
                 }
+
             }
         }
         return config

@@ -1,6 +1,6 @@
 {
-  "name": "@capacitor-community/sqlite",
-  "version": "4.2.2-1",
+  "name": "@composoftware/sqlite",
+  "version": "4.2.2-1-fork-5",
   "description": "Community plugin for native & electron SQLite databases",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
@@ -12,13 +12,13 @@
     "dist/",
     "ios/Plugin/",
     "electron/",
-    "CapacitorCommunitySqlite.podspec"
+    "ComposoftwareSqlite.podspec"
   ],
   "author": "Jean Pierre Quéau",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/capacitor-community/sqlite.git"
+    "url": "git@github.com:composoftware/sqlite.git"
   },
   "bugs": {
     "url": "https://github.com/capacitor-community/sqlite/issues"
